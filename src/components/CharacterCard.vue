@@ -9,7 +9,7 @@ export default {
 
 <template>
     <div class="card">
-        <img src="https://images.ygoprodeck.com/images/cards_small/34541863.jpg" class="card-img-top" alt="...">
+        <img :src="character.card_images[0].image_url_small" alt="">
         <div class="card-body">
             <h5 class="card-title">{{ character.name }}</h5>
             <p class="card-text"> {{ character.archetype }}</p>
