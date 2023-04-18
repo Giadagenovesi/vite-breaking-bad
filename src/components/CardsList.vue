@@ -1,4 +1,5 @@
 <script>
+import axios from 'axios';
 import { store } from '../store';
 import CharacterCard from './CharacterCard.vue';
 import SortCard from './SortCard.vue';
@@ -13,13 +14,25 @@ export default {
             store
         };
     },
+    methods: {
+        handleSorting () {
+            axios.get("https://db.ygoprodeck.com/api/v7/cardinfo.php?num=20&offset=0", {
+                params: {
+                    archetype: this.store.selectedArchetype,
+                }
+            }).then((resp) => {
+                this.store.characters = resp.data.data;
+            })
+        }
+    }
+
 }
 </script>
 
 <template>
     <main>
         <div class="ms-sort-container py-4">
-            <SortCard />
+            <SortCard @sorted="handleSorting"/>
         </div>
         <div class="container py-4">
             <div class="ms-card-list-title py-3">
